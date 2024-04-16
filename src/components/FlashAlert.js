@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import flashAlertStyles from '../styles/flashAlert'
 
 const FlashAlert = (props) => {
-  const { message, duration = 5000, isVisible, onHide } = props
+  const { message, duration = 500000, isVisible, onHide } = props
 
   const [showMessage, setShowMessage] = useState(true)
 
@@ -26,7 +26,7 @@ const FlashAlert = (props) => {
     <>
       {showMessage && (
         <View style={styles.mainView}>
-          <Text>{message}</Text>
+          <Text style={styles.text}>{message}</Text>
           <Text onPress={handleClose}>close</Text>
         </View>
       )}

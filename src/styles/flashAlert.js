@@ -3,7 +3,12 @@ export default {
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderColor: 'black',
-    backgroundColor: '#ff6666',
-    padding: 10
+    backgroundColor: '#d0342c',
+    borderRadius: 5,
+    padding: 20,
+    marginVertical: 20
+  },
+  text: {
+    color: 'white'
   }
 }

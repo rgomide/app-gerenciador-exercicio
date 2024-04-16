@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Button, TextInput, Text } from 'react-native'
 import { supabase } from '../service/supabase'
-import { Button, Input } from 'react-native-elements'
 import FlashAlert from '../components/FlashAlert'
-import { HOME } from '../config/screensName'
+import { HOME_STACK } from '../config/screensName'
+import textInput from '../styles/textInput'
+import boxModel from '../styles/boxModel'
+import flex from '../styles/flex'
 
 const AuthScreen = (props) => {
   const [email, setEmail] = useState('')
@@ -25,7 +27,7 @@ const AuthScreen = (props) => {
       setErrorMessage(error.message)
       setShowAlert(true)
     } else {
-      navigation.navigate(HOME)
+      navigation.navigate(HOME_STACK)
     }
     setLoading(false)
   }
@@ -57,54 +59,43 @@ const AuthScreen = (props) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.boxModel.mainContainer}>
       <FlashAlert isVisible={showAlert} message={errorMessage} onHide={handleHideAlert} />
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input
-          label="Email"
+      <View style={styles.flex.gap5}>
+        <Text>Usuário</Text>
+        <TextInput
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder="email@address.com"
-          autoCapitalize={'none'}
+          style={styles.textInput.default}
         />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          label="Password"
+        <Text>Senha</Text>
+        <TextInput
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
           placeholder="Password"
-          autoCapitalize={'none'}
+          style={styles.textInput.default}
         />
-      </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button title="Entrar" disabled={loading} onPress={() => signInWithEmail()} />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Button
-          title="Criar um novo usuário"
-          disabled={loading}
-          onPress={() => signUpWithEmail()}
-        />
+        <View style={styles.boxModel.mt10}>
+          <Button title="Entrar" disabled={loading} onPress={() => signInWithEmail()} />
+        </View>
+        <View>
+          <Button
+            title="Criar um novo usuário"
+            disabled={loading}
+            onPress={() => signUpWithEmail()}
+          />
+        </View>
       </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch'
-  },
-  mt20: {
-    marginTop: 20
-  }
+  ...textInput,
+  ...boxModel,
+  ...flex
 })
 
 export default AuthScreen
