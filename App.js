@@ -1,8 +1,14 @@
 import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
 import { supabase } from './src/service/supabase'
-import Auth from './src/screens/Auth'
-import { View, Text } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import AuthScreen from './src/screens/AuthScreen'
+import HomeScreen from './src/screens/HomeScreen'
+import AuthContext from './src/contexts/AuthContext'
+import { HOME, AUTH } from './src/config/screensName'
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   const [session, setSession] = useState(null)
@@ -13,14 +19,18 @@ export default function App() {
     })
 
     supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
+      setSession(session || {})
     })
   }, [])
 
   return (
-    <View>
-      <Auth />
-      {session && session.user && <Text>{session.user.id}</Text>}
-    </View>
+    <AuthContext.Provider value={{ session }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={AUTH}>
+          <Stack.Screen name={AUTH} component={AuthScreen} options={{ headerShown: false }} />
+          <Stack.Screen name={HOME} component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
   )
 }

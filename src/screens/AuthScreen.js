@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { supabase } from '../service/supabase'
 import { Button, Input } from 'react-native-elements'
 import FlashAlert from '../components/FlashAlert'
+import { HOME } from '../config/screensName'
 
-export default function Auth() {
+const AuthScreen = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [showAlert, setShowAlert] = useState(false)
 
-  async function signInWithEmail() {
+  const navigation = props.navigation
+
+  const signInWithEmail = async () => {
     setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
@@ -21,11 +24,13 @@ export default function Auth() {
     if (error) {
       setErrorMessage(error.message)
       setShowAlert(true)
+    } else {
+      navigation.navigate(HOME)
     }
     setLoading(false)
   }
 
-  async function signUpWithEmail() {
+  const signUpWithEmail = async () => {
     setLoading(true)
     const {
       data: { session },
@@ -57,7 +62,6 @@ export default function Auth() {
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input
           label="Email"
-          leftIcon={{ type: 'font-awesome', name: 'envelope' }}
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder="email@address.com"
@@ -67,7 +71,6 @@ export default function Auth() {
       <View style={styles.verticallySpaced}>
         <Input
           label="Password"
-          leftIcon={{ type: 'font-awesome', name: 'lock' }}
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
@@ -103,3 +106,5 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 })
+
+export default AuthScreen

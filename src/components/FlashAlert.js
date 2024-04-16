@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native'
 import { useEffect, useState } from 'react'
+import flashAlertStyles from '../styles/flashAlert'
 
 const FlashAlert = (props) => {
   const { message, duration = 5000, isVisible, onHide } = props
@@ -10,7 +11,7 @@ const FlashAlert = (props) => {
     setShowMessage(isVisible)
     if (isVisible) {
       const timeout = setTimeout(() => {
-        onHide() // Hide the alert after the specified duration
+        onHide()
       }, duration)
       return () => clearTimeout(timeout)
     }
@@ -33,14 +34,6 @@ const FlashAlert = (props) => {
   )
 }
 
-const styles = StyleSheet.create({
-  mainView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderColor: 'black',
-    backgroundColor: '#ff6666',
-    padding: 10
-  }
-})
+const styles = StyleSheet.create(flashAlertStyles)
 
 export default FlashAlert
