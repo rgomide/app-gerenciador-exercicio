@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Button, TextInput, Text } from 'react-native'
 import { supabase } from '../service/supabase'
 import FlashAlert from '../components/FlashAlert'
-import { HOME_STACK } from '../config/screensName'
+import { USER_AREA } from '../config/screensName'
 import textInput from '../styles/textInput'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
@@ -27,7 +27,7 @@ const AuthScreen = (props) => {
       setErrorMessage(error.message)
       setShowAlert(true)
     } else {
-      navigation.navigate(HOME_STACK)
+      navigation.navigate(USER_AREA)
     }
     setLoading(false)
   }

@@ -4,9 +4,9 @@ import { supabase } from './src/service/supabase'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AuthScreen from './src/screens/AuthScreen'
-import HomeStackScreen from './src/screens/HomeStackScreen'
+import UserAreaStackScreen from './src/screens/UserAreaStackScreen'
 import AuthContext from './src/contexts/AuthContext'
-import { AUTH, HOME_STACK } from './src/config/screensName'
+import { AUTH, USER_AREA } from './src/config/screensName'
 import appTheme from './src/styles/appTheme'
 
 const Stack = createNativeStackNavigator()
@@ -29,7 +29,7 @@ export default function App() {
       <NavigationContainer theme={appTheme} >
         <Stack.Navigator initialRouteName={AUTH} screenOptions={{ headerShown: false }}  >
           <Stack.Screen name={AUTH} component={AuthScreen} />
-          <Stack.Screen name={HOME_STACK} component={HomeStackScreen} />
+          <Stack.Screen name={USER_AREA} component={UserAreaStackScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
