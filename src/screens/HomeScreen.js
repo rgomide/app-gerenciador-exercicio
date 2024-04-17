@@ -1,20 +1,26 @@
 import { Text, View, Button, StyleSheet } from 'react-native'
 import AuthContext from '../contexts/AuthContext'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { supabase } from '../service/supabase'
 import { AUTH, ABOUT } from '../config/screensName'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
 
 const HomeScreen = (props) => {
+  const [loading, setLoading] = useState(false)
+
   const { navigation } = props
   const { session: { user = { email: 'Not authenticated' } } = {} } = useContext(AuthContext)
 
-  navigation.setOptions({ headerBackVisible: false })
+  useEffect(() => {
+    navigation.setOptions({ headerBackVisible: false })
+  }, [])
 
   const onLogout = async () => {
+    setLoading(true)
     await supabase.auth.signOut()
     navigation.navigate(AUTH)
+    setLoading(false)
   }
 
   const onNavigateToAbout = () => {
@@ -25,8 +31,8 @@ const HomeScreen = (props) => {
     <View style={styles.boxModel.mainContainer}>
       <View style={styles.flex.gap5}>
         <Text>Bem vindo: {user.email}</Text>
-        <Button title="Sobre" onPress={onNavigateToAbout} />
-        <Button title="Sair" onPress={onLogout} />
+        <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
+        <Button title="Sair" disabled={loading} onPress={onLogout} />
       </View>
     </View>
   )
