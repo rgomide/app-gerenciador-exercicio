@@ -24,7 +24,7 @@ const HomeScreen = (props) => {
   return (
     <View style={styles.boxModel.mainContainer}>
       <View style={styles.flex.gap5}>
-        <Text>Wellcome {user.email}</Text>
+        <Text>Bem vindo: {user.email}</Text>
         <Button title="Sobre" onPress={onNavigateToAbout} />
         <Button title="Sair" onPress={onLogout} />
       </View>

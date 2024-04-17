@@ -59,7 +59,7 @@ const AuthScreen = (props) => {
   }
 
   return (
-    <View style={styles.boxModel.mainContainer}>
+    <View style={[styles.boxModel.mainContainer, styles.loginContainer]}>
       <FlashAlert isVisible={showAlert} message={errorMessage} onHide={handleHideAlert} />
       <View style={styles.flex.gap5}>
         <Text>Usuário</Text>
@@ -68,7 +68,7 @@ const AuthScreen = (props) => {
           value={email}
           placeholder="email@address.com"
           style={styles.textInput.default}
-          textContentType="email"
+          textContentType="emailAddress"
         />
         <Text>Senha</Text>
         <TextInput
@@ -78,7 +78,7 @@ const AuthScreen = (props) => {
           placeholder="Password"
           style={styles.textInput.default}
         />
-        <View style={styles.boxModel.mt10}>
+        <View style={styles.boxModel.mt20}>
           <Button title="Entrar" disabled={loading} onPress={() => signInWithEmail()} />
         </View>
         <View>
@@ -94,6 +94,10 @@ const AuthScreen = (props) => {
 }
 
 const styles = StyleSheet.create({
+  loginContainer: {
+    height: '100%',
+    justifyContent: 'center'
+  },
   ...textInput,
   ...boxModel,
   ...flex
