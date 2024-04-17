@@ -10,6 +10,8 @@ const HomeScreen = (props) => {
   const { navigation } = props
   const { session: { user = { email: 'Not authenticated' } } = {} } = useContext(AuthContext)
 
+  navigation.setOptions({ headerBackVisible: false })
+
   const onLogout = async () => {
     await supabase.auth.signOut()
     navigation.navigate(AUTH)

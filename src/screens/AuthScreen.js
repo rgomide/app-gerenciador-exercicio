@@ -68,6 +68,7 @@ const AuthScreen = (props) => {
           value={email}
           placeholder="email@address.com"
           style={styles.textInput.default}
+          textContentType="email"
         />
         <Text>Senha</Text>
         <TextInput
