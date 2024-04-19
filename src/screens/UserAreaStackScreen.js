@@ -16,6 +16,9 @@ const UserAreaStackScreen = () => {
           title: 'Início', headerLeft: () => <></>,
           tabBarIcon: () => {
             return <Ionicons name='home' size={20} />
+          },
+          tabBarLabelStyle: {
+            fontSize: 12
           }
         }}
       />
@@ -23,6 +26,9 @@ const UserAreaStackScreen = () => {
         title: 'Sobre',
         tabBarIcon: () => {
           return <Ionicons name='barbell-sharp' size={20} />
+        },
+        tabBarLabelStyle: {
+          fontSize: 12
         }
       }} />
     </UserArea.Navigator>
