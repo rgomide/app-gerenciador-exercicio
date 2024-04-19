@@ -1,9 +1,9 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { ABOUT, HOME } from '../config/screensName'
 import HomeScreen from './HomeScreen'
 import AboutScreen from './AboutScreen'
 
-const UserArea = createNativeStackNavigator()
+const UserArea = createBottomTabNavigator()
 
 const UserAreaStackScreen = () => {
   return (
