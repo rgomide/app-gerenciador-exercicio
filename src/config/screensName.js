@@ -1,4 +1,5 @@
 export const AUTH = 'AuthScreen'
 export const ABOUT = 'AboutScreen'
+export const DOGS = 'DogsScreen'
 export const HOME = 'HomeScreen'
 export const USER_AREA = 'UserAreaStackScreen'

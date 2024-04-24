@@ -8,8 +8,8 @@ import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
 
 const AuthScreen = (props) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('renato.s.gomide@gmail.com')
+  const [password, setPassword] = useState('123456')
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [showAlert, setShowAlert] = useState(false)

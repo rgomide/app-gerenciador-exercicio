@@ -2,7 +2,7 @@ import { Text, View, Button, StyleSheet } from 'react-native'
 import AuthContext from '../contexts/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import { supabase } from '../service/supabase'
-import { AUTH, ABOUT } from '../config/screensName'
+import { AUTH, ABOUT, DOGS } from '../config/screensName'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
 
@@ -23,16 +23,17 @@ const HomeScreen = (props) => {
     setLoading(false)
   }
 
-  const onNavigateToAbout = () => {
-    navigation.navigate(ABOUT)
+  const onNavigate = (screenName) => {
+    navigation.navigate(screenName)
   }
 
   return (
     <View style={styles.boxModel.mainContainer}>
       <View style={styles.flex.gap5}>
         <Text>Bem vindo: {user.email}</Text>
-        <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
-        <Button title="Sair" disabled={loading} onPress={onLogout} />
+        <Button title="Sobre" disabled={loading} onPress={() => onNavigate(ABOUT)} />
+        <Button title="Dogs" disabled={loading} onPress={() => onNavigate(DOGS)} />
+        <Button title="Sair" disabled={loading} onPress={() => onLogout()} />
       </View>
     </View>
   )
