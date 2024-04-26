@@ -20,7 +20,7 @@ git checkout -b nome-branch
 ```
 Atualizar branch local
 ```
-git pull
+git pull NNNNNN 
 ```
 
 ## Ícones
