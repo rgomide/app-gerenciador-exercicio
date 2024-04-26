@@ -23,4 +23,4 @@ Os ícones utilizados são da biblioteca [@expo/vector-icons](https://docs.expo.
 - [useContext](https://react.dev/reference/react/useContext)
 
 
-minha alteração
+minha alteração!!!!
