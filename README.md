@@ -12,6 +12,17 @@
 2. Execute `npm install`.
 3. Execute `npm run web`.
 
+## Comandos Uteis do github
+
+Criar novo branch
+```
+git checkout -b nome-branch
+```
+Atualizar branch local
+```
+git pull
+```
+
 ## Ícones
 
 Os ícones utilizados são da biblioteca [@expo/vector-icons](https://docs.expo.dev/guides/icons/#expovector-icons). Eles podem ser consultados a partir da [galeria oficial](https://icons.expo.fyi/Index).
