@@ -62,7 +62,7 @@ git checkout -b NOME-DA-NOVA-BRANCH
 ```
 
 ### 9. Verificar qual é o branch atual
-````
+```
 git branch --show-current
 ``` 
 
