@@ -14,14 +14,59 @@
 
 ## Comandos Uteis do github
 
-Criar novo branch
+### 1. Criar novo branch
 ```
-git checkout -b nome-branch
+    git checkout -b nome-branch
 ```
-Atualizar branch local
+
+### 2. Atualizar branch local
 ```
-git pull NNNNNN 
+    git pull
 ```
+
+### 3. Configurar `user.name`
+
+- Configurar de forma global para a máquina
+```
+    git config --global user.name "primeiro_nome sobrenome"
+```
+- Configurar especificamente para um repositório
+```
+    git config user.name "primeiro_nome sobrenome"
+```
+
+### 4. Configurar `user.email`
+- Configurar de forma global para a máquina
+```
+    git config --global user.email "nome@example.com"
+```
+- Configurar especificamente para um repositório
+```
+    git config user.email "nome@example.com"
+```
+
+### 5. Função do `git push`
+Serve para enviar os commits locais para um repositório remoto
+
+### 6. Função do `git pull`
+Usado para buscar e baixar conteúdo de repositórios remotos e fazer a atualização imediata ao repositório local para que os conteúdos sejam iguais
+
+### 7. Fazer o checkout de uma branch existente
+```
+git checkout NOME-DA-BRANCH
+```
+
+### 8. Fazer o checkout para uma nova branch
+```
+git checkout -b NOME-DA-NOVA-BRANCH
+```
+
+### 9. Verificar qual é o branch atual
+````
+git branch --show-current
+``` 
+
+
 
 ## Ícones
 
