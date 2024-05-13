@@ -1,3 +1,4 @@
+``` mermaid
 erDiagram
     user ||--o{ desempenho : id
     user ||--o{ usuario_exercicio : id
@@ -74,4 +75,5 @@ erDiagram
         int id_usuario FK
         int id_exercicio FK
     }
+```
 
