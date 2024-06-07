@@ -11,6 +11,9 @@ const HomeScreen = (props) => {
 
   const { navigation } = props
   const { session: { user = { email: 'Not authenticated' } } = {} } = useContext(AuthContext)
+  const context = useContext(AuthContext)
+
+  console.log('userId', context.session.user.id)
 
   useEffect(() => {
     navigation.setOptions({ headerBackVisible: false })

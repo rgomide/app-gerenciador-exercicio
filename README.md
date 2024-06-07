@@ -77,3 +77,4 @@ Os ícones utilizados são da biblioteca [@expo/vector-icons](https://docs.expo.
 - [useState](https://react.dev/reference/react/useState)
 - [useEffect](https://react.dev/reference/react/useEffect)
 - [useContext](https://react.dev/reference/react/useContext)
+- [Biblioteca React Native Elements](https://reactnativeelements.com/)

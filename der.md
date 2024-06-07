@@ -1,15 +1,13 @@
 ``` mermaid
 erDiagram
-    user ||--o{ desempenho : id
-    user ||--o{ usuario_exercicio : id
-    user ||--o{ treino: id
-    user {
+    usuario ||--o{ desempenho : id
+    usuario ||--o{ usuario_exercicio : id
+    usuario ||--o{ treino: id
+    usuario {
         serial id PK
-        string nome_usuario
-        string email
-        string senha
-        int qtde_seguidores
-        int qtde_seguindo
+        string nome
+        string *email UK
+        uuid *id_usuario_supabase
     }
 
 
@@ -33,8 +31,8 @@ erDiagram
     treino ||--o{ rotina: id
     treino {
         serial id PK
-        int id_usuario FK
-        varchar(255) nome
+        int *id_usuario FK
+        varchar(255) *nome
     }
 
     desempenho }|--|| exercicio : id

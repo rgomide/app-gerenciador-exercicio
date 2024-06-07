@@ -12,14 +12,25 @@ import appTheme from './src/styles/appTheme'
 const Stack = createNativeStackNavigator()
 
 export default function App() {
+  // melhorar o nome desse state
   const [session, setSession] = useState(null)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log(session)
       setSession(session)
     })
 
     supabase.auth.onAuthStateChange((_event, session) => {
+      console.log(session)
+      // verificar se já existe usuário com session.user.email
+      // caso não existe, crie um novo usuário na nossa tabela `usuario` com esses dados
+      // com upsert e adicione a referência do usuário no state session
+      //
+      // setSession({
+      //   session: session,
+      //   user: user
+      // })
       setSession(session || {})
     })
   }, [])
