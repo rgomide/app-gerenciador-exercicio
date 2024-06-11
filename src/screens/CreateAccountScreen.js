@@ -40,13 +40,15 @@ const CreateAccount = () => {
   }
 
   const checkData = (password, confirmedPassword) => {
-   if (password.length<=0 || confirmPassWord.length<=0 || email.length<=0) {
+    if (password.length <= 0 || confirmPassWord.length <= 0 || email.length <= 0) {
       setErrorMessage('Todos os campos devem ser preenchidos')
       setShowAlert(true)
     } else if (password !== confirmedPassword) {
       setErrorMessage('As senhas informadas não coincidem')
       setShowAlert(true)
-    } else { signUpWithEmail() }
+    } else {
+      signUpWithEmail()
+    }
   }
 
   const handleHideAlert = () => {
@@ -54,9 +56,15 @@ const CreateAccount = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={[styles.boxModel.mainContainer, styles.loginContainer, { alignItems: 'center', gap: 30 }]}>
+    <ScrollView
+      contentContainerStyle={[
+        styles.boxModel.mainContainer,
+        styles.loginContainer,
+        { alignItems: 'center', gap: 30 }
+      ]}
+    >
       <View style={styles.userIcon}>
-        <Ionicons name='person-add-outline' color={'#fff'} size={80} />
+        <Ionicons name="person-add-outline" color={'#fff'} size={80} />
       </View>
 
       <View style={[styles.flex, { gap: 20 }]}>
@@ -99,14 +107,24 @@ const CreateAccount = () => {
         </View>
 
         <View style={styles.boxModel.mt20}>
-          <TouchableOpacity style={styles.btn} disabled={loading} onPress={() => { checkData(password, confirmPassWord) }}>
+          <TouchableOpacity
+            style={styles.btn}
+            disabled={loading}
+            onPress={() => {
+              checkData(password, confirmPassWord)
+            }}
+          >
             <Text style={styles.btnText}>Criar conta</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{marginBottom: 20}}>
+        <View style={{ marginBottom: 20 }}>
           <Text style={[styles.enterTxt, { color: '#fff' }]}>Já tem uma conta?</Text>
-          <TouchableOpacity onPress={() => { navigation.navigate(AUTH) }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(AUTH)
+            }}
+          >
             <Text style={[styles.enterTxt, { color: '#F28B0C' }]}>Entrar!</Text>
           </TouchableOpacity>
         </View>
@@ -118,7 +136,7 @@ const CreateAccount = () => {
 const styles = StyleSheet.create({
   loginContainer: {
     height: '100%',
-    justifyContent: 'space-around',
+    justifyContent: 'space-around'
   },
 
   userIcon: {
@@ -168,7 +186,7 @@ const styles = StyleSheet.create({
   btnText: {
     color: '#fff',
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
 
   enterTxt: {

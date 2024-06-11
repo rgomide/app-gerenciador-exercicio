@@ -39,9 +39,15 @@ const AuthScreen = (props) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={[styles.boxModel.mainContainer, styles.loginContainer, { alignItems: 'center', gap: 80 }]}>
+    <ScrollView
+      contentContainerStyle={[
+        styles.boxModel.mainContainer,
+        styles.loginContainer,
+        { alignItems: 'center', gap: 80 }
+      ]}
+    >
       <View style={styles.userIcon}>
-        <Ionicons name='person-outline' color={'#fff'} size={80} />
+        <Ionicons name="person-outline" color={'#fff'} size={80} />
       </View>
 
       <View style={[styles.flex, { gap: 20 }]}>
@@ -70,13 +76,23 @@ const AuthScreen = (props) => {
           />
         </View>
         <View style={styles.boxModel.mt20}>
-          <TouchableOpacity style={styles.btn} disabled={loading} onPress={() => { signInWithEmail() }}>
+          <TouchableOpacity
+            style={styles.btn}
+            disabled={loading}
+            onPress={() => {
+              signInWithEmail()
+            }}
+          >
             <Text style={styles.btnText}>Entrar</Text>
           </TouchableOpacity>
         </View>
         <View>
           <Text style={[styles.newAcountTxt, { color: '#fff' }]}>Ainda não tem uma conta?</Text>
-          <TouchableOpacity onPress={() => { navigation.navigate(CREATE_ACCOUNT) }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(CREATE_ACCOUNT)
+            }}
+          >
             <Text style={[styles.newAcountTxt, { color: '#F28B0C' }]}>Crie uma agora!</Text>
           </TouchableOpacity>
         </View>
@@ -129,7 +145,7 @@ const styles = StyleSheet.create({
   btnText: {
     color: '#fff',
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
 
   newAcountTxt: {
