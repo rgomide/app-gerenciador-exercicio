@@ -9,6 +9,7 @@ import AuthContext from './src/contexts/AuthContext'
 import { AUTH, USER_AREA, CREATE_ACCOUNT } from './src/config/screensName'
 import appTheme from './src/styles/appTheme'
 import CreateAcountScreen from './src/screens/CreateAccountScreen'
+import { upsertUsuario } from './src/service/usuarioService'
 
 const Stack = createNativeStackNavigator()
 
@@ -24,15 +25,17 @@ export default function App() {
 
     supabase.auth.onAuthStateChange((_event, session) => {
       console.log(session)
+      if (session) {
+        upsertUsuario(session.user.email, session.user.id)
+      }
       // verificar se já existe usuário com session.user.email
       // caso não existe, crie um novo usuário na nossa tabela `usuario` com esses dados
       // com upsert e adicione a referência do usuário no state session
       //
-      // setSession({
-      //   session: session,
-      //   user: user
-      // })
-      setSession(session || {})
+      setSession({
+        session: session,
+        user: session.user
+       })
     })
   }, [])
 
