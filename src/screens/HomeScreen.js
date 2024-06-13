@@ -1,13 +1,17 @@
-import { Text, View, Button, StyleSheet } from 'react-native'
+import { Text, View, Button, StyleSheet, TextInput } from 'react-native'
 import AuthContext from '../contexts/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import { supabase } from '../service/supabase'
 import { AUTH, ABOUT } from '../config/screensName'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
+import { insertTreino } from '../service/treinoService'
+import { getIdUsuario } from '../service/usuarioService'
 
 const HomeScreen = (props) => {
   const [loading, setLoading] = useState(false)
+  const [nome, setNome] = useState()
+  const [usuarioId, setUsuarioId] = useState()
 
   const { navigation } = props
   const { session: { user = { email: 'Not authenticated' } } = {} } = useContext(AuthContext)
@@ -17,7 +21,18 @@ const HomeScreen = (props) => {
 
   useEffect(() => {
     navigation.setOptions({ headerBackVisible: false })
+    loadIdUsuario()
   }, [])
+
+  const loadIdUsuario = async () => {
+    const { data } = await getIdUsuario(context.session.user.email)
+    setUsuarioId(data[0].id)
+  }
+
+  const loadInsertTreino = async () => {
+    await insertTreino(usuarioId, nome)
+    setNome('')
+  }
 
   const onLogout = async () => {
     setLoading(true)
@@ -36,6 +51,9 @@ const HomeScreen = (props) => {
         <Text>Bem vindo: {user.email}</Text>
         <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
         <Button title="Sair" disabled={loading} onPress={onLogout} />
+        <Text style={{color: 'white'}}>Nome do treino:</Text>
+        <TextInput style={{borderWidth: 1, borderColor: 'white', color: 'white'}} onChangeText={setNome} value={nome}></TextInput>
+        <Button title="Criar treino" disabled={loading} onPress={loadInsertTreino} />
       </View>
     </View>
   )
