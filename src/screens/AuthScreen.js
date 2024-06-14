@@ -8,8 +8,12 @@ import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-web'
+import { useTranslation } from 'react-i18next'
+import langConstants from '../lang/constants'
 
 const AuthScreen = (props) => {
+  const { t } = useTranslation()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -53,7 +57,7 @@ const AuthScreen = (props) => {
       <View style={[styles.flex, { gap: 20 }]}>
         <FlashAlert isVisible={showAlert} message={errorMessage} onHide={handleHideAlert} />
         <View style={styles.inputsContainer}>
-          <Text style={styles.lblInputs}>Email</Text>
+          <Text style={styles.lblInputs}>{t(langConstants.EMAIL)}</Text>
           <TextInput
             onChangeText={(text) => setEmail(text)}
             value={email}
@@ -65,7 +69,7 @@ const AuthScreen = (props) => {
         </View>
 
         <View style={styles.inputsContainer}>
-          <Text style={styles.lblInputs}>Senha</Text>
+          <Text style={styles.lblInputs}>{t(langConstants.SENHA)}</Text>
           <TextInput
             onChangeText={(text) => setPassword(text)}
             value={password}
@@ -83,17 +87,21 @@ const AuthScreen = (props) => {
               signInWithEmail()
             }}
           >
-            <Text style={styles.btnText}>Entrar</Text>
+            <Text style={styles.btnText}>{t(langConstants.ENTRAR)}</Text>
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={[styles.newAcountTxt, { color: '#fff' }]}>Ainda não tem uma conta?</Text>
+          <Text style={[styles.newAcountTxt, { color: '#fff' }]}>
+            {t(langConstants.AINDA_NAO_TEM_UMA_CONTA)}
+          </Text>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate(CREATE_ACCOUNT)
             }}
           >
-            <Text style={[styles.newAcountTxt, { color: '#F28B0C' }]}>Crie uma agora!</Text>
+            <Text style={[styles.newAcountTxt, { color: '#F28B0C' }]}>
+              {t(langConstants.CRIE_UMA_AGORA)}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
