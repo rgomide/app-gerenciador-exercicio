@@ -10,6 +10,7 @@ import { AUTH, USER_AREA, CREATE_ACCOUNT } from './src/config/screensName'
 import appTheme from './src/styles/appTheme'
 import CreateAcountScreen from './src/screens/CreateAccountScreen'
 import { upsertUsuario } from './src/service/usuarioService'
+import './src/lang/i18n'
 
 const Stack = createNativeStackNavigator()
 
