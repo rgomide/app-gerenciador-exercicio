@@ -3,6 +3,7 @@ import AuthContext from '../contexts/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import { supabase } from '../service/supabase'
 import { AUTH, ABOUT } from '../config/screensName'
+import colors from '../styles/appTheme'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
 import { insertTreino } from '../service/treinoService'
@@ -46,7 +47,7 @@ const HomeScreen = (props) => {
   }
 
   return (
-    <View style={styles.boxModel.mainContainer}>
+    <View style={[styles.boxModel.mainContainer, { backgroundColor: '#0D0D0D' }]}>
       <View style={styles.flex.gap5}>
         <Text>Bem vindo: {user.email}</Text>
         <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
