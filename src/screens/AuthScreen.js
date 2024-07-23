@@ -112,6 +112,7 @@ const AuthScreen = (props) => {
 const styles = StyleSheet.create({
   loginContainer: {
     height: '100%',
+    backgroundColor: '#0D0D0D',
     justifyContent: 'center'
   },
 
