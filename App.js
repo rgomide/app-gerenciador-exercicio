@@ -34,9 +34,9 @@ export default function App() {
       // com upsert e adicione a referência do usuário no state session
       //
       setSession({
-        session: session,
-        user: session.user
-       })
+           session: session,
+           user: session.user
+         })
     })
   }, [])
 

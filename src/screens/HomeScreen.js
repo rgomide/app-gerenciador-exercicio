@@ -6,8 +6,9 @@ import { AUTH, ABOUT } from '../config/screensName'
 import colors from '../styles/appTheme'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
-import { insertTreino } from '../service/treinoService'
+import { deleteTreino, getIdTreinoByName, insertTreino, updateTreino } from '../service/treinoService'
 import { getIdUsuario } from '../service/usuarioService'
+import { insertRotina, selectRotinasByTreino } from '../service/rotinaService'
 
 const HomeScreen = (props) => {
   const [loading, setLoading] = useState(false)
@@ -52,6 +53,12 @@ const HomeScreen = (props) => {
         <Text>Bem vindo: {user.email}</Text>
         <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
         <Button title="Sair" disabled={loading} onPress={onLogout} />
+        <Button title='select rotinas' onPress={async () => {
+          const {data} = await selectRotinasByTreino(32)
+          data.forEach(rotina => {
+            console.log(rotina.nome_rotina)
+          })
+          }}/>
       </View>
     </View>
   )
