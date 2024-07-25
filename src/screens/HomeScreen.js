@@ -52,13 +52,6 @@ const HomeScreen = (props) => {
         <Text>Bem vindo: {user.email}</Text>
         <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
         <Button title="Sair" disabled={loading} onPress={onLogout} />
-        <Text style={{ color: 'white' }}>Nome do treino:</Text>
-        <TextInput
-          style={{ borderWidth: 1, borderColor: 'white', color: 'white' }}
-          onChangeText={setNome}
-          value={nome}
-        ></TextInput>
-        <Button title="Criar treino" disabled={loading} onPress={loadInsertTreino} />
       </View>
     </View>
   )
