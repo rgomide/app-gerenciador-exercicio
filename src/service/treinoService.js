@@ -15,3 +15,7 @@ export async function deleteTreino(id) {
 export async function getIdTreinoByName(nome) {
   return await supabase.from('treino').select('id').eq('nome', nome)
 }
+
+export async function selectTreinosByUsuario(id_usuario) {
+  return await supabase.from('treino').select().eq('id_usuario', id_usuario)
+}
