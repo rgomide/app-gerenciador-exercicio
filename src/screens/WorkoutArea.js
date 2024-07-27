@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TextInput, FlatList } from 'react-native'
 import React from 'react'
 import background from '../styles/appTheme'
 import { TouchableOpacity } from 'react-native'
@@ -11,16 +11,19 @@ import { useContext } from 'react'
 import { useState } from 'react'
 import AuthContext from '../contexts/AuthContext'
 import { useEffect } from 'react'
-import { insertTreino } from '../service/treinoService'
+import { insertTreino, selectTreinosByUsuario } from '../service/treinoService'
 import { getIdUsuario } from '../service/usuarioService'
+import RNPickerSelect from "react-native-picker-select";
+import { insertRotina, selectRotinasByTreino } from '../service/rotinaService'
 
 const WorkoutArea = (props) => {
-  //os componentes de rotina são só placeholders pra ver como vai ficar no final.
-
   const [modalVisible, setModalVisible] = useState(false)
   const [nome, setNome] = useState('')
-  const [usuarioId, setUsuarioId] = useState()
+  const [id_usuario, setId_usuario] = useState()
   const [loading, setLoading] = useState(false)
+  const [treinos, setTreinos] = useState([])
+  const [idTreino, setIdTreino] = useState()
+  const [rotinas, setRotinas] = useState([])
 
   const { navigation } = props
   const { session: { user = { email: 'Not authenticated' } } = {} } = useContext(AuthContext)
@@ -29,16 +32,51 @@ const WorkoutArea = (props) => {
   useEffect(() => {
     navigation.setOptions({ headerBackVisible: false })
     loadIdUsuario()
-  }, [])
+    loadTreinos()
+  }, [id_usuario])
+  
+  useEffect(() => {
+    loadRotinas()
+  }, [idTreino])
 
   const loadIdUsuario = async () => {
-    const { data } = await getIdUsuario(context.session.user.email)
-    setUsuarioId(data[0].id)
+    const { data } = await getIdUsuario(user.email)
+    setId_usuario(data[0].id)
   }
 
   const loadInsertTreino = async () => {
-    await insertTreino(usuarioId, nome)
+    await insertTreino(id_usuario, nome)
     setNome('')
+  }
+
+  const loadTreinos = async () => {
+    if (!id_usuario) {
+      return([])
+    }else{
+      const { data } = await selectTreinosByUsuario(id_usuario)
+      let arrayItems = []
+      data.forEach(treino => {
+        arrayItems.push({ label: treino.nome, value: treino.id })
+      })
+      setIdTreino(data[0].id)
+      setTreinos(arrayItems)
+    }
+  }
+
+  const loadInsertRotina = async () => {
+    await insertRotina(idTreino, nome)
+    setNome('')
+  }
+
+  const loadRotinas = async () => {
+    if (idTreino != null) {
+      const {data} = await selectRotinasByTreino(idTreino)
+      let arrayData = []
+      data.forEach(rotina => {
+        arrayData.push({nome_rotina: rotina.nome_rotina})
+      })
+      setRotinas(arrayData)
+    }
   }
 
   return (
@@ -103,6 +141,15 @@ const WorkoutArea = (props) => {
         <View style={{ backgroundColor: 'rgba(27, 26, 25, 0.9), flex: 1' }}></View>
       </Modal>
 
+      <View>
+        <RNPickerSelect
+          placeholder={{}}
+          onValueChange={(value) => setIdTreino(value)}
+          items={treinos}
+          useNativeAndroidPickerStyle={false}
+        />
+      </View>
+
       <View style={{ gap: 10 }}>
         <TouchableOpacity
           onPress={() => {
@@ -121,19 +168,10 @@ const WorkoutArea = (props) => {
       </View>
 
       <View style={{ gap: 25 }}>
-        <RoutineCard
-          title="Placeholder title"
-          description="Lorem Ipsum is simply dummy text of the ext ever since the 1500s"
-        />
-
-        <RoutineCard
-          title="Placeholder title 2"
-          description="Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry standard dummy text ever since the 1500s"
-        />
-
-        <RoutineCard
-          title="Placeholder title 3"
-          description="Lorem Ipsum is simply dummy text o industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s"
+        <FlatList
+          data={rotinas}
+          renderItem={({item}) => <RoutineCard title={item.nome_rotina}/>}
+          contentContainerStyle={{gap: 25}}
         />
       </View>
     </ScrollView>
