@@ -50,7 +50,7 @@ const HomeScreen = (props) => {
   return (
     <View style={[styles.boxModel.mainContainer, { backgroundColor: '#0D0D0D' }]}>
       <View style={styles.flex.gap5}>
-        <Text>Bem vindo: {user.email}</Text>
+        <Text style={{color: '#fff', fontSize: 24}}>Bem vindo: {user.email}</Text>
         <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
         <Button title="Sair" disabled={loading} onPress={onLogout} />
         <Button title='select treinos' onPress={async () => {
