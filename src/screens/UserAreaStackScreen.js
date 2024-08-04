@@ -3,8 +3,7 @@ import { ABOUT, HOME, WORKOUT_AREA } from '../config/screensName'
 import HomeScreen from './HomeScreen'
 import AboutScreen from './AboutScreen'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import WorkoutArea from './WorkoutArea'
-
+import WorkoutAreaStackScreen from './WorkoutAreaStackScreen'
 const UserArea = createBottomTabNavigator()
 
 const UserAreaStackScreen = () => {
@@ -30,7 +29,7 @@ const UserAreaStackScreen = () => {
       />
       <UserArea.Screen
         name={WORKOUT_AREA}
-        component={WorkoutArea}
+        component={WorkoutAreaStackScreen}
         options={{
           title: 'Treino',
           headerTintColor: '#F28B0C',
@@ -38,7 +37,7 @@ const UserAreaStackScreen = () => {
             const color = focused ? '#F28B0C' : '#fff'
             return <Ionicons name="barbell-sharp" color={color} size={20} />
           },
-          headerShown: true,
+          headerShown: false,
           tabBarActiveTintColor: '#F28B0C',
           tabBarInactiveTintColor: '#fff',
           tabBarLabelStyle: {

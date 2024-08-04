@@ -15,6 +15,7 @@ import { insertTreino, selectTreinosByUsuario } from '../service/treinoService'
 import { getIdUsuario } from '../service/usuarioService'
 import { insertRotina, selectRotinasByTreino } from '../service/rotinaService'
 import { Picker } from '@react-native-picker/picker';
+import { EDIT_WORKOUT } from '../config/screensName'
 
 const WorkoutArea = (props) => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -27,6 +28,7 @@ const WorkoutArea = (props) => {
   const [selectedTreino, setSelectedTreino] = useState()
   const [idTreino, setIdTreino] = useState()
   const [rotinas, setRotinas] = useState([])
+  const [isFocused, setIsFocused] = useState()
 
   const { navigation } = props
   const { session: { user = { email: 'Not authenticated' } } = {} } = useContext(AuthContext)
@@ -36,11 +38,16 @@ const WorkoutArea = (props) => {
     navigation.setOptions({ headerBackVisible: false })
     loadIdUsuario()
     loadTreinos()
-  }, [id_usuario])
+  }, [id_usuario, nome])
 
   useEffect(() => {
     loadRotinas()
   }, [idTreino])
+
+  useEffect(() => {
+    loadTreinos()
+    setIsFocused(navigation.isFocused())
+  }, [isFocused])
 
   const loadIdUsuario = async () => {
     const { data } = await getIdUsuario(user.email)
@@ -57,18 +64,12 @@ const WorkoutArea = (props) => {
       return ([])
     } else {
       const { data } = await selectTreinosByUsuario(id_usuario)
-      let arrayItems = []
-      data.forEach(treino => {
-        arrayItems.push({ label: treino.nome, value: treino.id })
-      })
-      setIdTreino(data[0].id)
-      setTreinos(arrayItems)
+      setTreinos(data)
     }
   }
 
   const loadInsertRotina = async () => {
     await insertRotina(idTreino, nome)
-    setNome('')
   }
 
   const loadRotinas = async () => {
@@ -82,11 +83,16 @@ const WorkoutArea = (props) => {
     }
   }
 
+  const checkPickerTitle = () => {
+    if (idTreino != null) {
+      return false
+    }else return true
+  }
+
   return (
     <ScrollView
-      contai
       style={[styles.boxModel.mainContainer, { backgroundColor: '0#D0D0D', flex: 1 }]}
-      contentContainerStyle={{ gap: 30 }}
+      contentContainerStyle={{ gap: 20 }}
     >
       <Modal
         id='modal pra gerenciar os treinos'
@@ -143,6 +149,7 @@ const WorkoutArea = (props) => {
         visible={editWorkoutModalVisible}
         onRequestClose={() => {
           setModalVisible(!editWorkoutModalVisible)
+          loadTreinos()
         }}
       >
         <View
@@ -261,6 +268,8 @@ const WorkoutArea = (props) => {
             disabled={loading}
             onPress={() => {
               loadInsertTreino()
+              loadRotinas()
+              setNome('')
               setModalVisible(false)
             }}
             style={[styles.mainBtn, { backgroundColor: '#F28b0c', alignItems: 'center' }]}
@@ -281,6 +290,10 @@ const WorkoutArea = (props) => {
         <View style={{ backgroundColor: 'rgba(27, 26, 25, 0.9), flex: 1' }}></View>
       </Modal>
 
+      <View style={styles.header}>
+            <Text style={styles.topText}>Treino</Text>
+      </View>
+
       <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
         <Picker
           selectedValue={selectedTreino}
@@ -290,29 +303,26 @@ const WorkoutArea = (props) => {
           }}
           style={styles.pickerStyle}
         >
-          <Picker.Item label='Selecione um treino' value={null} />
+          <Picker.Item label='Selecione um treino' value={null} enabled={checkPickerTitle()}/>
           {treinos.map((treino) => (
-            <Picker.Item key={treino.value} label={treino.label} value={treino.value} />
+            <Picker.Item key={treino.id} label={treino.nome} value={treino.id} />
           ))}
         </Picker>
 
-        <TouchableOpacity onPress={() => { setEditorModalVisible(true) }} style={{ padding: 3 }}>
+        <TouchableOpacity onPress={() => { navigation.navigate(EDIT_WORKOUT, {id_usuario}) }} style={{ padding: 3 }}>
           <Ionicons name='options-outline' color={'#fff'} size={24} />
         </TouchableOpacity>
       </View>
 
       <View style={{ gap: 10 }}>
-        <TouchableOpacity
-          onPress={() => {
-            setModalVisible(true)
-          }}
-          style={styles.mainBtn}
-        >
+        <TouchableOpacity style={styles.mainBtn}>
           <Ionicons color={'#F28B0C'} name="add-outline" size={25} />
-          <Text style={styles.mainText}>iniciar treino vazio</Text>
+          <Text style={styles.mainText}>Iniciar rotina vazia</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.mainBtn}>
+        <TouchableOpacity style={styles.mainBtn} onPress={() => {
+          setModalVisible(true)
+        }}>
           <Ionicons color={'#F28B0C'} name="add-outline" size={25} />
           <Text style={styles.mainText}>nova rotina</Text>
         </TouchableOpacity>
@@ -330,6 +340,22 @@ const WorkoutArea = (props) => {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    width: '100%',
+    padding: '4%',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  topText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#F28B0C',
+    width: '100%',
+    textAlign: 'center',
+    flex: 1
+  },
+
   mainBtn: {
     borderRadius: 20,
     flexDirection: 'row',
