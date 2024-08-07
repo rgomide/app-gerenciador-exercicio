@@ -19,7 +19,7 @@
     "@react-navigation/native-stack": "6.9.26",
     "@supabase/supabase-js": "2.42.4",
     "axios": "1.6.7",
-    "expo": "50.0.7",
+    "expo": "51.0.25",
     "expo-crypto": "^12.8.1",
     "expo-status-bar": "1.11.1",
     "i18next": "^23.11.5",

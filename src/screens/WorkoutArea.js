@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, TextInput, FlatList } from 'react-native'
+import { View, Text, StyleSheet, TextInput, FlatList, ScrollView } from 'react-native'
 import React from 'react'
 import background from '../styles/appTheme'
 import { TouchableOpacity } from 'react-native'
 import boxModel from '../styles/boxModel'
 import { Ionicons } from '@expo/vector-icons'
 import RoutineCard from '../components/RoutineCard'
-import { Modal, ScrollView } from 'react-native-web'
+import { Modal } from 'react-native-web'
 import textInput from '../styles/textInput'
 import { useContext } from 'react'
 import { useState } from 'react'
@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 import { insertTreino, selectTreinosByUsuario } from '../service/treinoService'
 import { getIdUsuario } from '../service/usuarioService'
 import { insertRotina, selectRotinasByTreino } from '../service/rotinaService'
-import { Picker } from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker'
 import { EDIT_WORKOUT } from '../config/screensName'
 
 const WorkoutArea = (props) => {
@@ -61,7 +61,7 @@ const WorkoutArea = (props) => {
 
   const loadTreinos = async () => {
     if (!id_usuario) {
-      return ([])
+      return []
     } else {
       const { data } = await selectTreinosByUsuario(id_usuario)
       setTreinos(data)
@@ -76,7 +76,7 @@ const WorkoutArea = (props) => {
     if (idTreino != null) {
       const { data } = await selectRotinasByTreino(idTreino)
       let arrayData = []
-      data.forEach(rotina => {
+      data.forEach((rotina) => {
         arrayData.push({ nome_rotina: rotina.nome_rotina })
       })
       setRotinas(arrayData)
@@ -86,7 +86,7 @@ const WorkoutArea = (props) => {
   const checkPickerTitle = () => {
     if (idTreino != null) {
       return false
-    }else return true
+    } else return true
   }
 
   return (
@@ -95,7 +95,7 @@ const WorkoutArea = (props) => {
       contentContainerStyle={{ gap: 20 }}
     >
       <Modal
-        id='modal pra gerenciar os treinos'
+        id="modal pra gerenciar os treinos"
         animationType="slide"
         transparent={true}
         visible={editorModalVisible}
@@ -103,39 +103,66 @@ const WorkoutArea = (props) => {
           setModalVisible(!editorModalVisible)
         }}
       >
-        <View style={{
-          backgroundColor: '#000',
-          width: '100%',
-          alignSelf: 'center',
-          padding: 12,
-          borderRadius: 12,
-          gap: 10,
-          position: 'absolute',
-          bottom: 0
-        }}>
+        <View
+          style={{
+            backgroundColor: '#000',
+            width: '100%',
+            alignSelf: 'center',
+            padding: 12,
+            borderRadius: 12,
+            gap: 10,
+            position: 'absolute',
+            bottom: 0
+          }}
+        >
+          <View
+            style={{
+              height: 8,
+              width: 70,
+              backgroundColor: '#fff',
+              borderRadius: 100,
+              alignSelf: 'center'
+            }}
+          ></View>
 
-          <View style={{
-            height: 8,
-            width: 70,
-            backgroundColor: '#fff',
-            borderRadius: 100,
-            alignSelf: 'center'
-          }}></View>
-
-          <Text style={{ fontSize: 26, color: '#F28b0c', marginVertical: 10 }}>Configurações de treino</Text>
+          <Text style={{ fontSize: 26, color: '#F28b0c', marginVertical: 10 }}>
+            Configurações de treino
+          </Text>
 
           <View style={{ gap: 2 }}>
-            <TouchableOpacity onPress={() => { setEditWorkoutModalVisible(true); setEditorModalVisible(false); }} style={[styles.editWorkoutBtn, { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }]}>
-              <Ionicons name='pencil-outline' size={24} color={'#fff'} />
+            <TouchableOpacity
+              onPress={() => {
+                setEditWorkoutModalVisible(true)
+                setEditorModalVisible(false)
+              }}
+              style={[
+                styles.editWorkoutBtn,
+                { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }
+              ]}
+            >
+              <Ionicons name="pencil-outline" size={24} color={'#fff'} />
               <Text style={styles.editWorkoutTxt}>Editar treino</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.editWorkoutBtn, { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }]}>
-              <Ionicons name='trash-outline' size={24} color={'red'} />
+            <TouchableOpacity
+              style={[
+                styles.editWorkoutBtn,
+                { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }
+              ]}
+            >
+              <Ionicons name="trash-outline" size={24} color={'red'} />
               <Text style={[styles.editWorkoutTxt, { color: 'red' }]}>Deletar treino</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => { setEditorModalVisible(false) }} style={[styles.editWorkoutBtn, { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }]}>
+            <TouchableOpacity
+              onPress={() => {
+                setEditorModalVisible(false)
+              }}
+              style={[
+                styles.editWorkoutBtn,
+                { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }
+              ]}
+            >
               <Text style={styles.editWorkoutTxt}>Cancelar</Text>
             </TouchableOpacity>
           </View>
@@ -143,7 +170,7 @@ const WorkoutArea = (props) => {
       </Modal>
 
       <Modal
-        id='modal pra editar os treinos'
+        id="modal pra editar os treinos"
         animationType="slide"
         transparent={true}
         visible={editWorkoutModalVisible}
@@ -166,14 +193,15 @@ const WorkoutArea = (props) => {
             borderRadius: 20
           }}
         >
-
-          <View style={{
-            height: 8,
-            width: 70,
-            backgroundColor: '#fff',
-            borderRadius: 100,
-            alignSelf: 'center'
-          }}></View>
+          <View
+            style={{
+              height: 8,
+              width: 70,
+              backgroundColor: '#fff',
+              borderRadius: 100,
+              alignSelf: 'center'
+            }}
+          ></View>
 
           <Text style={[styles.mainText, { color: '#E28b0c' }]}>Editar treino</Text>
 
@@ -188,7 +216,7 @@ const WorkoutArea = (props) => {
                 fontSize: 24,
                 color: '#fff',
                 borderWidth: 3,
-                borderColor: 'rgba(27, 26, 25, 0.9)',
+                borderColor: 'rgba(27, 26, 25, 0.9)'
               }
             ]}
           />
@@ -208,7 +236,10 @@ const WorkoutArea = (props) => {
             onPress={() => {
               setEditWorkoutModalVisible(false)
             }}
-            style={[styles.mainBtn, { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }]}
+            style={[
+              styles.mainBtn,
+              { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }
+            ]}
           >
             <Text style={[styles.mainText, { textAlign: 'center' }]}>Cancelar</Text>
           </TouchableOpacity>
@@ -237,14 +268,15 @@ const WorkoutArea = (props) => {
             borderRadius: 20
           }}
         >
-
-          <View style={{
-            height: 8,
-            width: 70,
-            backgroundColor: '#fff',
-            borderRadius: 100,
-            alignSelf: 'center'
-          }}></View>
+          <View
+            style={{
+              height: 8,
+              width: 70,
+              backgroundColor: '#fff',
+              borderRadius: 100,
+              alignSelf: 'center'
+            }}
+          ></View>
 
           <Text style={[styles.mainText, { color: '#E28b0c' }]}>Novo treino vazio</Text>
 
@@ -259,7 +291,7 @@ const WorkoutArea = (props) => {
                 fontSize: 24,
                 color: '#fff',
                 borderWidth: 3,
-                borderColor: 'rgba(27, 26, 25, 0.9)',
+                borderColor: 'rgba(27, 26, 25, 0.9)'
               }
             ]}
           />
@@ -282,7 +314,10 @@ const WorkoutArea = (props) => {
             onPress={() => {
               setModalVisible(false)
             }}
-            style={[styles.mainBtn, { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }]}
+            style={[
+              styles.mainBtn,
+              { backgroundColor: 'rgba(27, 26, 25, 0.9)', alignItems: 'center' }
+            ]}
           >
             <Text style={[styles.mainText, { textAlign: 'center' }]}>Cancelar</Text>
           </TouchableOpacity>
@@ -291,26 +326,39 @@ const WorkoutArea = (props) => {
       </Modal>
 
       <View style={styles.header}>
-            <Text style={styles.topText}>Treino</Text>
+        <Text style={styles.topText}>Treino</Text>
       </View>
 
-      <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          gap: 8,
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
         <Picker
           selectedValue={selectedTreino}
           onValueChange={(itemValue, itemIndex) => {
-            setSelectedTreino(itemValue);
-            setIdTreino(itemValue);
+            setSelectedTreino(itemValue)
+            setIdTreino(itemValue)
           }}
           style={styles.pickerStyle}
         >
-          <Picker.Item label='Selecione um treino' value={null} enabled={checkPickerTitle()}/>
+          <Picker.Item label="Selecione um treino" value={null} enabled={checkPickerTitle()} />
           {treinos.map((treino) => (
             <Picker.Item key={treino.id} label={treino.nome} value={treino.id} />
           ))}
         </Picker>
 
-        <TouchableOpacity onPress={() => { navigation.navigate(EDIT_WORKOUT, {id_usuario}) }} style={{ padding: 3 }}>
-          <Ionicons name='options-outline' color={'#fff'} size={24} />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate(EDIT_WORKOUT, { id_usuario })
+          }}
+          style={{ padding: 3 }}
+        >
+          <Ionicons name="options-outline" color={'#fff'} size={24} />
         </TouchableOpacity>
       </View>
 
@@ -320,20 +368,27 @@ const WorkoutArea = (props) => {
           <Text style={styles.mainText}>Iniciar rotina vazia</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.mainBtn} onPress={() => {
-          setModalVisible(true)
-        }}>
+        <TouchableOpacity
+          style={styles.mainBtn}
+          onPress={() => {
+            setModalVisible(true)
+          }}
+        >
           <Ionicons color={'#F28B0C'} name="add-outline" size={25} />
           <Text style={styles.mainText}>nova rotina</Text>
         </TouchableOpacity>
       </View>
 
       <View style={{ gap: 25 }}>
-        <FlatList
+        {rotinas.map((item) => (
+          <RoutineCard title={item.nome_rotina} />
+        ))}
+        {/* <FlatList
           data={rotinas}
+
           renderItem={({ item }) => <RoutineCard title={item.nome_rotina} />}
           contentContainerStyle={{ gap: 25 }}
-        />
+        /> */}
       </View>
     </ScrollView>
   )
@@ -344,7 +399,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: '4%',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   topText: {
@@ -364,7 +419,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#222221',
     paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: 15
   },
 
   editWorkoutBtn: {
@@ -373,7 +428,7 @@ const styles = StyleSheet.create({
     gap: 10,
     backgroundColor: '#222221',
     paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: 15
   },
 
   editWorkoutTxt: {
@@ -395,7 +450,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(27, 26, 25, 0.9)',
     borderRadius: 12,
     fontSize: 20,
-    paddingHorizontal: 5,
+    paddingHorizontal: 5
   },
 
   ...boxModel,
@@ -403,7 +458,6 @@ const styles = StyleSheet.create({
 })
 
 export default WorkoutArea
-
 
 /*
         <RNPickerSelect

@@ -6,7 +6,13 @@ import { AUTH, ABOUT } from '../config/screensName'
 import colors from '../styles/appTheme'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
-import { deleteTreino, getIdTreinoByName, insertTreino, selectTreinosByUsuario, updateTreino } from '../service/treinoService'
+import {
+  deleteTreino,
+  getIdTreinoByName,
+  insertTreino,
+  selectTreinosByUsuario,
+  updateTreino
+} from '../service/treinoService'
 import { getIdUsuario } from '../service/usuarioService'
 import { insertRotina, selectRotinasByTreino } from '../service/rotinaService'
 
@@ -50,22 +56,28 @@ const HomeScreen = (props) => {
   return (
     <View style={[styles.boxModel.mainContainer, { backgroundColor: '#0D0D0D' }]}>
       <View style={styles.flex.gap5}>
-        <Text style={{color: '#fff', fontSize: 24}}>Bem vindo: {user.email}</Text>
+        <Text style={{ color: '#fff', fontSize: 24 }}>Bem vindo: {user.email}</Text>
         <Button title="Sobre" disabled={loading} onPress={onNavigateToAbout} />
         <Button title="Sair" disabled={loading} onPress={onLogout} />
-        <Button title='select treinos' onPress={async () => {
-          const id_usuario = (await getIdUsuario(context.session.user.email)).data[0].id
-          const {data} = await selectTreinosByUsuario(id_usuario)
-          data.forEach(treino => {
-            console.log(treino.nome)
-          })
-        }}/>
-        <Button title='select rotinas' onPress={async () => {
-          const {data} = await selectRotinasByTreino(32)
-          data.forEach(rotina => {
-            console.log(rotina.nome_rotina)
-          })
-          }}/>
+        <Button
+          title="select treinos"
+          onPress={async () => {
+            const id_usuario = (await getIdUsuario(context.session.user.email)).data[0].id
+            const { data } = await selectTreinosByUsuario(id_usuario)
+            data.forEach((treino) => {
+              console.log(treino.nome)
+            })
+          }}
+        />
+        <Button
+          title="select rotinas"
+          onPress={async () => {
+            const { data } = await selectRotinasByTreino(32)
+            data.forEach((rotina) => {
+              console.log(rotina.nome_rotina)
+            })
+          }}
+        />
       </View>
     </View>
   )
