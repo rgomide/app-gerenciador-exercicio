@@ -11,6 +11,7 @@ import appTheme from './src/styles/appTheme'
 import CreateAcountScreen from './src/screens/CreateAccountScreen'
 import { upsertUsuario } from './src/service/usuarioService'
 import './src/lang/i18n'
+import { StatusBar } from 'expo-status-bar'
 
 const Stack = createNativeStackNavigator()
 
@@ -49,6 +50,7 @@ export default function App() {
           <Stack.Screen name={USER_AREA} component={UserAreaStackScreen} />
         </Stack.Navigator>
       </NavigationContainer>
+      <StatusBar style='light'/>
     </AuthContext.Provider>
   )
 }

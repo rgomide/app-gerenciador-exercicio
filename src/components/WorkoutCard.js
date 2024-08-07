@@ -1,6 +1,5 @@
 import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { deleteTreino, getTreinoById, updateTreino } from '../service/treinoService'
-import Feather from '@expo/vector-icons/Feather'
 import { useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import textInput from '../styles/textInput'
@@ -73,7 +72,7 @@ const WorkoutCard = ({ id_treino, setChangeTreino }) => {
             }}
           ></View>
 
-          <Text style={[styles.mainText, { color: '#51AFF7' }]}>Editar Treino</Text>
+          <Text style={[styles.mainText, { color: '#F28b0c' }]}>Editar Treino</Text>
 
           <TextInput
             value={nome}
@@ -86,7 +85,7 @@ const WorkoutCard = ({ id_treino, setChangeTreino }) => {
                 fontSize: 24,
                 color: '#fff',
                 borderWidth: 3,
-                borderColor: 'rgba(81, 175, 247, 0.9)'
+                borderColor: '#ccc'
               }
             ]}
           />
@@ -96,7 +95,7 @@ const WorkoutCard = ({ id_treino, setChangeTreino }) => {
               editTreino()
               setModalVisible(false)
             }}
-            style={[styles.mainBtn, { backgroundColor: '#51AFF7', alignItems: 'center' }]}
+            style={[styles.mainBtn, { backgroundColor: '#F28b0c', alignItems: 'center' }]}
           >
             <Text style={[styles.mainText, { textAlign: 'center' }]}>Editar</Text>
           </TouchableOpacity>
@@ -120,11 +119,11 @@ const WorkoutCard = ({ id_treino, setChangeTreino }) => {
 
       <View style={{ width: '25%', flexDirection: 'row', justifyContent: 'space-between' }}>
         <TouchableOpacity style={styles.edit} onPress={() => setModalVisible(true)}>
-          <Feather name="edit" size={24} color="white" />
+          <Ionicons name='create-outline' size={18} color='#fff'/>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.exclude} onPress={() => excludeTreino(id_treino)}>
-          <Feather name="trash-2" size={24} color="white" />
+          <Ionicons name='trash-outline' size={18} color='#fff'/>
         </TouchableOpacity>
       </View>
     </View>
@@ -141,20 +140,20 @@ const styles = StyleSheet.create({
   },
 
   edit: {
-    backgroundColor: '#51AFF7',
+    backgroundColor: '#60a5fa',
     justifyContent: 'center',
     alignItems: 'center',
     width: 35,
-    // borderRadius: '25%',
+    borderRadius: 8,
     aspectRatio: 1 / 1
   },
 
   exclude: {
-    backgroundColor: '#ff0000',
+    backgroundColor: '#f43f5e',
     justifyContent: 'center',
     alignItems: 'center',
     width: 35,
-    // borderRadius: '25%',
+    borderRadius: 8,
     aspectRatio: 1 / 1
   },
 

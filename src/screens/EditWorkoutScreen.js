@@ -26,7 +26,6 @@ const EditWorkoutScreen = (props) => {
   const loadTreinos = async () => {
     console.log('loadTreinos')
     const { data } = await selectTreinosByUsuario(id_usuario)
-    console.log(data)
     setTreinos(data)
   }
 
@@ -38,13 +37,10 @@ const EditWorkoutScreen = (props) => {
     console.log('useEffect')
     loadTreinos()
     setChangeTreino(false)
-    console.log(parentNavigator)
   }, [changeTreino])
 
-  console.log('rendered =====>', treinos)
-
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -90,7 +86,7 @@ const EditWorkoutScreen = (props) => {
                 fontSize: 24,
                 color: '#fff',
                 borderWidth: 3,
-                borderColor: 'rgba(81, 175, 247, 0.9)'
+                borderColor: '#ccc'
               }
             ]}
           />
@@ -126,7 +122,7 @@ const EditWorkoutScreen = (props) => {
           <Ionicons name="arrow-back" size={24} color="#F28b0c" />
         </TouchableOpacity>
 
-        <Text style={styles.topText}>Editar Treinamentos</Text>
+        <Text style={styles.topText}>Gerenciar treinos</Text>
 
         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => setModalVisible(true)}>
           <Text style={{ fontSize: 18, color: '#F28b0c' }}>Criar</Text>
@@ -135,9 +131,8 @@ const EditWorkoutScreen = (props) => {
 
       <ScrollView
         style={[styles.boxModel.mainContainer, { backgroundColor: '0#D0D0D', flex: 1 }]}
-        contentContainerStyle={{ gap: 15 }}
       >
-        <View>
+        <View style={{ gap: 15 }}>
           {treinos.map((treino) => (
             <WorkoutCard key={treino.id} id_treino={treino.id} setChangeTreino={setChangeTreino} />
           ))}
@@ -153,8 +148,6 @@ const styles = StyleSheet.create({
     padding: '4%',
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: 'black',
-    borderWidth: 1
   },
 
   topText: {
@@ -179,7 +172,7 @@ const styles = StyleSheet.create({
     gap: 15,
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#51AFF7',
+    backgroundColor: '#F28b0c',
     paddingHorizontal: 10,
     paddingVertical: 15
   },

@@ -31,13 +31,13 @@ const UserAreaStackScreen = () => {
         name={WORKOUT_AREA}
         component={WorkoutAreaStackScreen}
         options={{
-          title: 'Treino',
+          title: 'Área de treinos',
           headerTintColor: '#F28B0C',
           tabBarIcon: ({ focused }) => {
             const color = focused ? '#F28B0C' : '#fff'
             return <Ionicons name="barbell-sharp" color={color} size={20} />
           },
-          headerShown: false,
+          headerShown: true,
           tabBarActiveTintColor: '#F28B0C',
           tabBarInactiveTintColor: '#fff',
           tabBarLabelStyle: {

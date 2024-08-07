@@ -325,14 +325,9 @@ const WorkoutArea = (props) => {
         <View style={{ backgroundColor: 'rgba(27, 26, 25, 0.9), flex: 1' }}></View>
       </Modal>
 
-      <View style={styles.header}>
-        <Text style={styles.topText}>Treino</Text>
-      </View>
-
       <View
         style={{
           flexDirection: 'row',
-          gap: 8,
           flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center'
@@ -356,7 +351,7 @@ const WorkoutArea = (props) => {
           onPress={() => {
             navigation.navigate(EDIT_WORKOUT, { id_usuario })
           }}
-          style={{ padding: 3 }}
+          style={{ padding: 10, borderRadius: 8, backgroundColor: '#222221' }}
         >
           <Ionicons name="options-outline" color={'#fff'} size={24} />
         </TouchableOpacity>
@@ -383,12 +378,6 @@ const WorkoutArea = (props) => {
         {rotinas.map((item) => (
           <RoutineCard title={item.nome_rotina} />
         ))}
-        {/* <FlatList
-          data={rotinas}
-
-          renderItem={({ item }) => <RoutineCard title={item.nome_rotina} />}
-          contentContainerStyle={{ gap: 25 }}
-        /> */}
       </View>
     </ScrollView>
   )
@@ -415,7 +404,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     flexDirection: 'row',
     gap: 15,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#222221',
     paddingHorizontal: 10,
@@ -444,7 +433,7 @@ const styles = StyleSheet.create({
   },
 
   pickerStyle: {
-    width: '70%',
+    width: '80%',
     paddingVertical: 15,
     color: '#fff',
     backgroundColor: 'rgba(27, 26, 25, 0.9)',
