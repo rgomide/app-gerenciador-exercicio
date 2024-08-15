@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import textInput from '../styles/textInput'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
@@ -6,7 +6,6 @@ import { supabase } from '../service/supabase'
 import FlashAlert from '../components/FlashAlert'
 import { Ionicons } from '@expo/vector-icons'
 import React, { useState } from 'react'
-import { Button, ScrollView } from 'react-native-web'
 import { AUTH } from '../config/screensName'
 
 const CreateAccount = () => {

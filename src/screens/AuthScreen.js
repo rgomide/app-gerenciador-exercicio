@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, TextInput, Text, ScrollView } from 'react-native'
+import { StyleSheet, View, TextInput, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { supabase } from '../service/supabase'
 import FlashAlert from '../components/FlashAlert'
 import { USER_AREA, CREATE_ACCOUNT } from '../config/screensName'
@@ -7,7 +7,6 @@ import textInput from '../styles/textInput'
 import boxModel from '../styles/boxModel'
 import flex from '../styles/flex'
 import { Ionicons } from '@expo/vector-icons'
-import { TouchableOpacity } from 'react-native-web'
 import { useTranslation } from 'react-i18next'
 import langConstants from '../lang/constants'
 
@@ -54,7 +53,7 @@ const AuthScreen = (props) => {
         <Ionicons name="person-outline" color={'#fff'} size={80} />
       </View>
 
-      <View style={[styles.flex, { gap: 20 }]}>
+      <View style={[styles.flex, { gap: 20, width: '85%' }]}>
         <FlashAlert isVisible={showAlert} message={errorMessage} onHide={handleHideAlert} />
         <View style={styles.inputsContainer}>
           <Text style={styles.lblInputs}>{t(langConstants.EMAIL)}</Text>
@@ -87,7 +86,9 @@ const AuthScreen = (props) => {
               signInWithEmail()
             }}
           >
-            <Text style={styles.btnText}>{t(langConstants.ENTRAR)}</Text>
+            <View>
+              <Text style={styles.btnText}>{t(langConstants.ENTRAR)}</Text>
+            </View>
           </TouchableOpacity>
         </View>
         <View>
@@ -99,9 +100,11 @@ const AuthScreen = (props) => {
               navigation.navigate(CREATE_ACCOUNT)
             }}
           >
-            <Text style={[styles.newAcountTxt, { color: '#F28B0C' }]}>
-              {t(langConstants.CRIE_UMA_AGORA)}
-            </Text>
+            <View>
+              <Text style={[styles.newAcountTxt, { color: '#F28B0C' }]}>
+                {t(langConstants.CRIE_UMA_AGORA)}
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -140,6 +143,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     borderRadius: 12,
     color: '#fff',
+    width: '100%',
     fontSize: 20
   },
 
