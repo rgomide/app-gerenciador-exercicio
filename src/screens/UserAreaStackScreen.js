@@ -3,7 +3,7 @@ import { ABOUT, HOME, WORKOUT_AREA } from '../config/screensName'
 import HomeScreen from './HomeScreen'
 import AboutScreen from './AboutScreen'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import WorkoutAreaStackScreen from './WorkoutAreaStackScreen'
+import WorkoutArea from './WorkoutArea'
 const UserArea = createBottomTabNavigator()
 
 const UserAreaStackScreen = () => {
@@ -29,7 +29,7 @@ const UserAreaStackScreen = () => {
       />
       <UserArea.Screen
         name={WORKOUT_AREA}
-        component={WorkoutAreaStackScreen}
+        component={WorkoutArea}
         options={{
           title: 'Área de treinos',
           headerTintColor: '#F28B0C',
