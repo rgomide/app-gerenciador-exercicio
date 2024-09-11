@@ -6,12 +6,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AuthScreen from './src/screens/AuthScreen'
 import UserAreaStackScreen from './src/screens/UserAreaStackScreen'
 import AuthContext from './src/contexts/AuthContext'
-import { AUTH, USER_AREA, CREATE_ACCOUNT } from './src/config/screensName'
+import { AUTH, USER_AREA, CREATE_ACCOUNT, EDIT_WORKOUT } from './src/config/screensName'
 import appTheme from './src/styles/appTheme'
 import CreateAcountScreen from './src/screens/CreateAccountScreen'
 import { upsertUsuario } from './src/service/usuarioService'
 import './src/lang/i18n'
 import { StatusBar } from 'expo-status-bar'
+import EditWorkoutScreen from './src/screens/EditWorkoutScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -48,6 +49,16 @@ export default function App() {
           <Stack.Screen name={AUTH} component={AuthScreen} />
           <Stack.Screen name={CREATE_ACCOUNT} component={CreateAcountScreen} />
           <Stack.Screen name={USER_AREA} component={UserAreaStackScreen} />
+          <Stack.Screen
+          name={EDIT_WORKOUT}
+          component={EditWorkoutScreen}
+          options={{
+            headerShown: false,
+            headerTitleStyle: { color: '#ffffff' },
+            headerTintColor: '#F28B0C',
+            title: 'Editar treinamentos'
+          }}
+        />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style='light'/>

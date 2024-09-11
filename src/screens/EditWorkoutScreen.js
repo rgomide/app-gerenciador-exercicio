@@ -24,7 +24,6 @@ const EditWorkoutScreen = (props) => {
   const parentNavigator = navigation.getParent()
 
   const loadTreinos = async () => {
-    console.log('loadTreinos')
     const { data } = await selectTreinosByUsuario(id_usuario)
     setTreinos(data)
   }
@@ -34,7 +33,6 @@ const EditWorkoutScreen = (props) => {
   }
 
   useEffect(() => {
-    console.log('useEffect')
     loadTreinos()
     setChangeTreino(false)
   }, [changeTreino])
